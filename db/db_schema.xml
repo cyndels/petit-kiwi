@@ -60,7 +60,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="886" y="237" name="ingredients">
+<table x="726" y="236" name="ingredients">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -73,21 +73,9 @@
 <row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="629" y="167" name="ingredients_list">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <row name="recipe_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="recipes" row="id" />
-</row>
-<row name="ingredient_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="ingredients" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
