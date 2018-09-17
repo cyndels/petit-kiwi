@@ -1,2 +1,8 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<ul>
+  <% @categories.each do |category| %>
+  <li><%= link_to category[0], recipes_path(category: category[0]) %></li>
+  <% end %>
+  <li><%= link_to 'Add new', root_path %></li>
+</ul>
+
+
