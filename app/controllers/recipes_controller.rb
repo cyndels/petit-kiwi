@@ -2,9 +2,9 @@ class RecipesController < ApplicationController
 
   def index
     if params[:category]
-      @recipes = Recipe.where(category: params[:category])
+      @recipes = current_user.recipes.where(category: params[:category])
     else
-      @recipes = Recipe.all
+      @recipes = current_user.recipes
     end
   end
 

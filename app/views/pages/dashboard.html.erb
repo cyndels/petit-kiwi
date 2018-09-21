@@ -1,0 +1,6 @@
+<ul>
+  <% @categories.each do |category| %>
+  <li><%= link_to category[0], recipes_path(category: category[0]) %></li>
+  <% end %>
+  <li><%= link_to 'Add new', root_path %></li>
+</ul>
