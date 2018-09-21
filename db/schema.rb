@@ -10,19 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_200312) do
+ActiveRecord::Schema.define(version: 2018_09_18_110534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "ingredients", force: :cascade do |t|
-    t.string "name"
+  create_table "doses", force: :cascade do |t|
     t.integer "unit"
     t.integer "quantity"
+    t.bigint "ingredient_id"
     t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+    t.index ["ingredient_id"], name: "index_doses_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_doses_on_recipe_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "instructions", force: :cascade do |t|
+    t.text "content"
+    t.bigint "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_instructions_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -30,9 +45,9 @@ ActiveRecord::Schema.define(version: 2018_09_17_200312) do
     t.integer "category"
     t.integer "cooking_time"
     t.integer "party"
-    t.text "instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "notes"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,5 +62,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_200312) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "ingredients", "recipes"
+  add_foreign_key "doses", "ingredients"
+  add_foreign_key "doses", "recipes"
+  add_foreign_key "instructions", "recipes"
 end

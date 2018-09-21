@@ -10,13 +10,3 @@
 </p>
 
 <h2>Ingredients</h2>
-
-<ul>
-  <% @recipe.ingredients.each do |ingredient| %>
-    <% if ingredient.unit == "piece" %>
-      <li><%= ingredient.quantity %> <%= ingredient.name %></li>
-    <% else %>
-      <li><%= ingredient.quantity %> <%= ingredient.unit %> <%= ingredient.name %></li>
-    <% end %>
-  <% end %>
-</ul>
