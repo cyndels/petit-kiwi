@@ -10,3 +10,11 @@
 </p>
 
 <h2>Ingredients</h2>
+
+<ul>
+  <% @recipe.doses.each do |dose| %>
+    <li><%= dose.quantity %> <%= dose.unit %> <%= dose.ingredient.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Retour au dashboard", dashboard_path %>

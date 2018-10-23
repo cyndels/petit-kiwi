@@ -1,11 +1,7 @@
 class RecipesController < ApplicationController
 
   def index
-    if params[:category]
-      @recipes = current_user.recipes.where(category: params[:category])
-    else
-      @recipes = current_user.recipes
-    end
+    @recipes = current_user.recipes.where(category: params[:category])
   end
 
   def show
@@ -20,7 +16,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
     if @recipe.save
-      redirect_to new_recipe_dose_path(@recipe)
+      redirect_to recipe_doses_path(@recipe)
     else
       render :new
     end

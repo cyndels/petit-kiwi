@@ -3,7 +3,7 @@
 <%= simple_form_for [@recipe] do |f| %>
   <%= f.input :name, label: "Nom de la recette" %>
   <%= f.input :category, label: "Catégorie", collection: Recipe.categories.keys %>
-  <%= f.input :cooking_time, label: "Temps de cuisson" %>
+  <%= f.input :cooking_time, label: "Temps de cuisson (en min)" %>
   <%= f.input :party, label: "Nombre de personnes" %>
   <%= f.input :notes %>
   <%= f.submit "Ajouter les ingredients" %>

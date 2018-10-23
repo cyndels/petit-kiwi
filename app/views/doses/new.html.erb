@@ -1,9 +1,6 @@
-<h1>Ajouter les ingrédients</h1>
-<h2><%= @recipe.name %></h2>
-
 <%= simple_form_for [@recipe, @dose] do |f| %>
   <%= f.input :quantity, label: "Quantité" %>
-  <%= f.input :ingredient_id, label: "Nom de l'ingrédient", collection: @ingredients %>
   <%= f.input :unit, label: "Unité", collection: Dose.units.keys %>
+  <%= f.association :ingredient %>
   <%= f.submit "Ajouter cet ingredient" %>
 <% end %>
