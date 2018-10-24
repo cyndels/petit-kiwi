@@ -13,8 +13,27 @@
 
 <ul>
   <% @recipe.doses.each do |dose| %>
-    <li><%= dose.quantity %> <%= dose.unit %> <%= dose.ingredient.name %></li>
+    <% if dose.unit == "piece" %>
+      <li><%= dose.quantity %> <%= dose.ingredient.name %></li>
+    <% else %>
+      <li> <%= dose.quantity %> <%= dose.unit %> <%= dose.ingredient.name %></li>
+    <% end %>
   <% end %>
 </ul>
 
+<%= link_to "Modifier les ingrédients", new_recipe_dose_path(@recipe) %>
+
+<h2>Instructions</h2>
+
+<ol>
+  <% @recipe.instructions.each do |instruction| %>
+    <li><%= instruction.content %></li>
+  <% end %>
+</ol>
+
+<%= link_to "Modifier les instructions", new_recipe_instruction_path(@recipe) %>
+<br>
+<br>
+<%= link_to "Supprimer cette recette", recipe_path(@recipe), method: :delete, data: { confirm: "Supprimer cette recette ?" } %>
+<br>
 <%= link_to "Retour au dashboard", dashboard_path %>

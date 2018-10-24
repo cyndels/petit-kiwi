@@ -1,13 +1,10 @@
 class DosesController < ApplicationController
-  def index
-    @recipe = Recipe.find(params[:recipe_id])
-    @doses = @recipe.doses
-    @dose = Dose.new
-  end
 
   def new
     @recipe = Recipe.find(params[:recipe_id])
+    @doses = @recipe.doses
     @dose = Dose.new
+    @ingredient = Ingredient.new
   end
 
   def create
@@ -15,10 +12,17 @@ class DosesController < ApplicationController
     @dose = Dose.new(dose_params)
     @dose.recipe = @recipe
     if @dose.save
-      redirect_to recipe_doses_path(@recipe)
+      redirect_to new_recipe_dose_path(@recipe)
     else
       render :new
     end
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:recipe_id])
+    @dose = Dose.find(params[:id])
+    @dose.destroy
+    redirect_to new_recipe_dose_path(@recipe)
   end
 
   private

@@ -1,0 +1,21 @@
+<h1>Instructions</h1>
+<h2><%= @recipe.name %></h2>
+
+<table>
+  <% if @instructions != nil %>
+    <% @instructions.each do |instruction| %>
+      <tr>
+        <td><%= instruction.content %></td>
+        <td><%= link_to "", recipe_instruction_path(@recipe, instruction), class: "fas fa-trash-alt delete-btn", method: :delete, data: { confirm: "Supprimer cette instruction ?" } %></td>
+      </tr>
+    <% end %>
+    <%= simple_form_for [@recipe, @instruction] do |f| %>
+      <tr>
+        <td><%= f.input :content %></td>
+        <td><%= f.submit "Ajouter cette instrcution" %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= link_to "Voir ma recette", recipe_path(@recipe) %>

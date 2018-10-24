@@ -16,10 +16,16 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
     if @recipe.save
-      redirect_to recipe_doses_path(@recipe)
+      redirect_to new_recipe_dose_path(@recipe)
     else
       render :new
     end
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to dashboard_path
   end
 
   private

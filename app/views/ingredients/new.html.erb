@@ -1,0 +1,4 @@
+<%= simple_form_for [@recipe, @ingredient] do |f| %>
+  <td><%= f.input :name, label: "Nom de l'ingrédient" %></td>
+  <td><%= f.submit "Ajouter à la liste" %></td>
+<% end %>

@@ -1,6 +1,29 @@
-<%= simple_form_for [@recipe, @dose] do |f| %>
-  <%= f.input :quantity, label: "Quantité" %>
-  <%= f.input :unit, label: "Unité", collection: Dose.units.keys %>
-  <%= f.association :ingredient %>
-  <%= f.submit "Ajouter cet ingredient" %>
-<% end %>
+<h1>Liste des ingrédients</h1>
+<h2><%= @recipe.name %></h2>
+
+<table>
+  <% if @doses != nil %>
+    <% @doses.each do |dose| %>
+      <tr>
+        <td><%= dose.ingredient.name %></td>
+        <td><%= dose.quantity %> <%= dose.unit %></td>
+        <td><%= link_to "", recipe_dose_path(@recipe, dose), class: "fas fa-trash-alt delete-btn", method: :delete, data: { confirm: "Supprimer cet ingrédient ?" } %></td>
+      </tr>
+    <% end %>
+    <%= simple_form_for [@recipe, @dose] do |f| %>
+      <tr>
+        <td><%= f.association :ingredient %></td>
+        <td style="display: flex"><%= f.input :quantity, label: "Quantité" %> <%= f.input :unit, label: "Unité", collection: Dose.units.keys %></td>
+        <td><%= f.submit "Ajouter cet ingredient" %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>Votre ingrédient n'est pas dans la liste ?</td>
+      <%= render :file => '/ingredients/new' %>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Voir ma recette", recipe_path(@recipe) %>
+<br>
+<%= link_to "Ajouter les instructions", new_recipe_instruction_path(@recipe) %>
