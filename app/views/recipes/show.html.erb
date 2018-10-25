@@ -34,6 +34,8 @@
 <%= link_to "Modifier les instructions", new_recipe_instruction_path(@recipe) %>
 <br>
 <br>
+<%= link_to "Ajouter à ma liste de course", "#" %>
+<br>
 <%= link_to "Supprimer cette recette", recipe_path(@recipe), method: :delete, data: { confirm: "Supprimer cette recette ?" } %>
 <br>
 <%= link_to "Retour au dashboard", dashboard_path %>

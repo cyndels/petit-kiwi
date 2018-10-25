@@ -6,7 +6,7 @@
     <% @instructions.each do |instruction| %>
       <tr>
         <td><%= instruction.content %></td>
-        <td><%= link_to "", recipe_instruction_path(@recipe, instruction), class: "fas fa-trash-alt delete-btn", method: :delete, data: { confirm: "Supprimer cette instruction ?" } %></td>
+        <td><%= link_to "", recipe_instruction_path(@recipe, instruction), class: "fas fa-trash", method: :delete, data: { confirm: "Supprimer cette instruction ?" } %></td>
       </tr>
     <% end %>
     <%= simple_form_for [@recipe, @instruction] do |f| %>

@@ -7,7 +7,7 @@
       <tr>
         <td><%= dose.ingredient.name %></td>
         <td><%= dose.quantity %> <%= dose.unit %></td>
-        <td><%= link_to "", recipe_dose_path(@recipe, dose), class: "fas fa-trash-alt delete-btn", method: :delete, data: { confirm: "Supprimer cet ingrédient ?" } %></td>
+        <td><%= link_to "", recipe_dose_path(@recipe, dose), class: "fas fa-trash", method: :delete, data: { confirm: "Supprimer cet ingrédient ?" } %></td>
       </tr>
     <% end %>
     <%= simple_form_for [@recipe, @dose] do |f| %>
