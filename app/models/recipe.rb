@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
   has_many :instructions, dependent: :destroy
   has_many :ingredients, through: :doses
   belongs_to :user
-  belongs_to :menu
+  belongs_to :wishlist, optional: true
   enum category: [:Aperitif, :Entree, :Plat, :Dessert, :Dejeuner]
   validates :name, presence: true, uniqueness: true
   validates :category, :cooking_time, :party, presence: true

@@ -1,0 +1,6 @@
+<h1>Créer une nouvelle kiwishlist</h1>
+
+<%= simple_form_for [@wishlist] do |f| %>
+  <%= f.input :name, label: "Nom de la kiwishlist" %>
+  <%= f.submit "Créer ma kiwishlist" %>
+<% end %>
