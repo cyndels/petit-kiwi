@@ -1,10 +1,9 @@
-<h1>Mes kiwishlists</h1>
+<h1>Mes wishlists</h1>
 
 <ul>
-  <% if @wishlists != nil %>
-    <% @wishlists.each do |wishlist| %>
-      <li><%= link_to wishlist.name, wishlist_path(wishlist) %></li>
-    <% end %>
+  <% @wishlists.each do |wishlist| %>
+    <li><%= link_to wishlist.name, wishlist_path(wishlist) %> <%= link_to "", wishlist_path(wishlist), class: "fas fa-trash", method: :delete, data: { confirm: "Supprimer cette wishlist ?" } %></li>
   <% end %>
-  <li><%= link_to "Créer une nouvelle kiwishlist", new_wishlist_path %></li>
 </ul>
+
+<%= link_to "Créer une nouvelle wishlist", new_wishlist_path %>

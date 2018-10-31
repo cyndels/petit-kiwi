@@ -1,0 +1,6 @@
+<h1>Ajouter cette recette à une wishlist</h1>
+
+<%= simple_form_for [@recipe, @wishlist_item] do |f| %>
+  <%= f.association :wishlist, label: "Choisir parmi mes wishlists" %>
+  <%= f.submit "Ajouter à ma wishlist" %>
+<% end %>

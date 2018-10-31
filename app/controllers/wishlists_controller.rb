@@ -21,10 +21,15 @@ class WishlistsController < ApplicationController
     end
   end
 
+  def destroy
+    @wishlist = Wishlist.find(params[:id])
+    @wishlist.destroy
+    redirect_to wishlists_path
+  end
+
   private
 
   def wishlist_params
     params.require(:wishlist).permit(:name)
   end
-
 end

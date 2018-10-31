@@ -2,6 +2,6 @@
 
 <ul>
   <% @wishlist.recipes.each do |recipe| %>
-
+    <li><%= recipe.name %> - <%= link_to "Voir la fiche recette", recipe_path(recipe) %></li>
   <% end %>
 </ul>

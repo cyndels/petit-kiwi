@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_182513) do
+ActiveRecord::Schema.define(version: 2018_10_31_211306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,9 +49,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_182513) do
     t.datetime "updated_at", null: false
     t.text "notes"
     t.bigint "user_id"
-    t.bigint "wishlist_id"
     t.index ["user_id"], name: "index_recipes_on_user_id"
-    t.index ["wishlist_id"], name: "index_recipes_on_wishlist_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +66,15 @@ ActiveRecord::Schema.define(version: 2018_10_30_182513) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishlist_items", force: :cascade do |t|
+    t.bigint "wishlist_id"
+    t.bigint "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_wishlist_items_on_recipe_id"
+    t.index ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
+  end
+
   create_table "wishlists", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -80,6 +87,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_182513) do
   add_foreign_key "doses", "recipes"
   add_foreign_key "instructions", "recipes"
   add_foreign_key "recipes", "users"
-  add_foreign_key "recipes", "wishlists"
+  add_foreign_key "wishlist_items", "recipes"
+  add_foreign_key "wishlist_items", "wishlists"
   add_foreign_key "wishlists", "users"
 end
