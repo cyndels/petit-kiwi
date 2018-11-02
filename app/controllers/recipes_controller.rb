@@ -6,6 +6,14 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    if @recipe.resize != nil && @recipe.resize != @recipe.party
+      @recipe.doses.each do |dose|
+        if dose.quantity != nil
+          dose.quantity = ((dose.quantity.to_f/@recipe.party)*@recipe.resize).ceil
+        end
+      end
+      @recipe.party = @recipe.resize
+    end
   end
 
   def new
@@ -22,6 +30,17 @@ class RecipesController < ApplicationController
     end
   end
 
+  def update
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(recipe_params)
+    redirect_to recipe_path(@recipe)
+  end
+
+  def resize
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe.update(resize: :resize)
+  end
+
   def destroy
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
@@ -31,7 +50,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :category, :cooking_time, :party, :instructions)
+    params.require(:recipe).permit(:name, :category, :cooking_time, :party, :instructions, :resize)
   end
 
 end

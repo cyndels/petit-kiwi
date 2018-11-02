@@ -1,0 +1,6 @@
+<h1>Changer les quantités</h1>
+
+<%= simple_form_for [@recipe] do |f| %>
+  <%= f.input :resize, label: "Nombre de personnes" %>
+  <%= f.submit "Redimensionner les ingredients" %>
+<% end %>

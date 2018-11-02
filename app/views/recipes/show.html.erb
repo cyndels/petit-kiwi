@@ -7,6 +7,7 @@
   <% else %>
     <%= @recipe.party %> personnes
   <% end %>
+  - <%= link_to "Modifier les quantités", recipe_resize_path(@recipe) %>
 </p>
 <%= link_to "Ajouter à une wishlist", new_recipe_wishlist_item_path(@recipe) %>
 
