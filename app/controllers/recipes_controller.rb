@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @item = Item.new
     if @recipe.resize != nil && @recipe.resize != @recipe.party
       @recipe.doses.each do |dose|
         if dose.quantity != nil
@@ -28,6 +29,10 @@ class RecipesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @recipe = Recipe.find(params[:id])
   end
 
   def update

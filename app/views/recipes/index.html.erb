@@ -2,10 +2,6 @@
   <% @recipes.each do |recipe| %>
     <li><%= link_to recipe.name, recipe_path(recipe) %></li>
   <% end %>
-  <% if params[:category] == "Aperitif" || params[:category] == "Entree" %>
-    <li><%= link_to "Ajouter une recette d'#{params[:category].downcase}", new_recipe_path(category: params[:category]) %></li>
-  <% else %>
-    <li><%= link_to "Ajouter une recette de #{params[:category].downcase}", new_recipe_path %></li>
-  <% end %>
+  <li><%= link_to "Ajouter une recette", new_recipe_path %></li>
   <li><%= link_to "Retour au dashboard", dashboard_path %></li>
 </ul>

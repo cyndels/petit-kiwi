@@ -4,8 +4,8 @@ class Recipe < ApplicationRecord
 
   has_many :instructions, dependent: :destroy
 
-  has_many :wishlist_items, dependent: :destroy
-  has_many :wishlists, through: :wishlist_items
+  has_many :items, dependent: :destroy
+  has_many :wishlists, through: :items
 
   belongs_to :user
 

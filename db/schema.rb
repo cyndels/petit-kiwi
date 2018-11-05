@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_110340) do
+ActiveRecord::Schema.define(version: 2018_11_05_204606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(version: 2018_11_01_110340) do
     t.index ["recipe_id"], name: "index_doses_on_recipe_id"
   end
 
+  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -38,6 +50,15 @@ ActiveRecord::Schema.define(version: 2018_11_01_110340) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_instructions_on_recipe_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.bigint "wishlist_id"
+    t.bigint "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_items_on_recipe_id"
+    t.index ["wishlist_id"], name: "index_items_on_wishlist_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -67,15 +88,6 @@ ActiveRecord::Schema.define(version: 2018_11_01_110340) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "wishlist_items", force: :cascade do |t|
-    t.bigint "wishlist_id"
-    t.bigint "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_wishlist_items_on_recipe_id"
-    t.index ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
-  end
-
   create_table "wishlists", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -87,8 +99,8 @@ ActiveRecord::Schema.define(version: 2018_11_01_110340) do
   add_foreign_key "doses", "ingredients"
   add_foreign_key "doses", "recipes"
   add_foreign_key "instructions", "recipes"
+  add_foreign_key "items", "recipes"
+  add_foreign_key "items", "wishlists"
   add_foreign_key "recipes", "users"
-  add_foreign_key "wishlist_items", "recipes"
-  add_foreign_key "wishlist_items", "wishlists"
   add_foreign_key "wishlists", "users"
 end

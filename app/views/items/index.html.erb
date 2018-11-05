@@ -1,0 +1,5 @@
+<ul>
+  <% @items.each do |item| %>
+    <li><%= item.recipe.name %> - <%= link_to "Voir la fiche recette", recipe_path(item.recipe) %> - <%= link_to "", wishlist_item_path(item.wishlist, item), class: "fas fa-trash", method: :delete, data: { confirm: "Supprimer cette recette de la wishlist ?" } %></li>
+  <% end %>
+</ul>
