@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   # routes for one recipe
   resources :recipes, path: 'recettes' do
     get '/redimensionner', to: 'recipes#resize', as: 'resize'
-    resources :doses, path: 'ingredients'
     resources :items, except: :destroy, path: 'ajouter-item'
     resources :ingredients
     resources :instructions

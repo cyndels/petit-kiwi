@@ -1,4 +1,24 @@
-<%= simple_form_for [@recipe, @ingredient] do |f| %>
-  <td><%= f.input :name, label: "Nom de l'ingrédient" %></td>
-  <td><%= f.submit "Ajouter à la liste" %></td>
-<% end %>
+<h1>Ingrédients</h1>
+<h2><%= @recipe.name %></h2>
+
+<table>
+  <% if @ingredients != nil %>
+    <% @ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.name %> (<%= ingredient.quantity %><%= ingredient.unit %>)</td>
+        <td><%= link_to "", recipe_ingredient_path(@recipe, ingredient), class: "fas fa-trash", method: :delete, data: { confirm: "Supprimer cet ingrédient ?" } %></td>
+      </tr>
+    <% end %>
+    <%= simple_form_for [@recipe, @ingredient] do |f| %>
+      <tr>
+        <td><%= f.input :name %></td>
+        <td><%= f.input :quantity %></td>
+        <td><%= f.input :unit, label: "Unité", collection: Ingredient.units.keys %></td>
+        <td><%= f.submit "Ajouter cet ingrédient" %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= link_to "Ajouter les instructions", new_recipe_instruction_path(@recipe) %>
+<%= link_to "Voir ma recette", recipe_path(@recipe) %>

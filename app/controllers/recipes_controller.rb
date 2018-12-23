@@ -8,9 +8,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @item = Item.new
     if @recipe.resize != nil && @recipe.resize != @recipe.party
-      @recipe.doses.each do |dose|
-        if dose.quantity != nil
-          dose.quantity = ((dose.quantity.to_f/@recipe.party)*@recipe.resize).ceil
+      @recipe.ingredients.each do |ingredient|
+        if ingredient.quantity != nil
+          ingredient.quantity = ((ingredient.quantity.to_f/@recipe.party)*@recipe.resize).ceil
         end
       end
       @recipe.party = @recipe.resize
@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
     if @recipe.save
-      redirect_to new_recipe_dose_path(@recipe)
+      redirect_to new_recipe_ingredient_path(@recipe)
     else
       render :new
     end

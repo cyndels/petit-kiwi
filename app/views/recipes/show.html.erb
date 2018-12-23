@@ -12,19 +12,15 @@
 
 <%= link_to "Ajouter à une wishlist", new_recipe_item_path(@recipe) %>
 
-<h2>Ingredients</h2>
+<h2>Instructions</h2>
 
-<ul>
-  <% @recipe.doses.each do |dose| %>
-    <% if dose.unit == "piece" %>
-      <li><%= dose.quantity %> <%= dose.ingredient.name %></li>
-    <% else %>
-      <li> <%= dose.quantity %> <%= dose.unit %> <%= dose.ingredient.name %></li>
-    <% end %>
+<ol>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <li><%= ingredient.quantity %> <%= ingredient.unit %> <%= ingredient.name %></li>
   <% end %>
-</ul>
+</ol>
 
-<%= link_to "Modifier les ingrédients", new_recipe_dose_path(@recipe) %>
+<%= link_to "Modifier les ingrédients", new_recipe_ingredient_path(@recipe) %>
 
 <h2>Instructions</h2>
 
