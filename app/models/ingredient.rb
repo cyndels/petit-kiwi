@@ -1,4 +1,6 @@
 class Ingredient < ApplicationRecord
-  has_many :doses
-  validates :name, presence: true, uniqueness: true
+  belongs_to :recipe
+  validates :name, presence: true
+
+  enum unit: [:kg, :g, :l, :cl, :ml]
 end

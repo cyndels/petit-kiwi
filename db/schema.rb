@@ -10,26 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_204606) do
+ActiveRecord::Schema.define(version: 2018_12_22_111853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "doses", force: :cascade do |t|
-    t.integer "unit"
-    t.integer "quantity"
-    t.bigint "ingredient_id"
-    t.bigint "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_doses_on_ingredient_id"
-    t.index ["recipe_id"], name: "index_doses_on_recipe_id"
+  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.integer "unit"
+    t.bigint "recipe_id"
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "instructions", force: :cascade do |t|
@@ -84,8 +89,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_204606) do
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
-  add_foreign_key "doses", "ingredients"
-  add_foreign_key "doses", "recipes"
+  add_foreign_key "ingredients", "recipes"
   add_foreign_key "instructions", "recipes"
   add_foreign_key "items", "recipes"
   add_foreign_key "items", "wishlists"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
-<!-- Active URL: http://db.lewagon.com/ -->
+<!-- Active URL: https://kitt.lewagon.com/db/778 -->
 <sql>
 <datatypes db="mysql">
   <group label="Numeric" color="rgb(238,238,170)">
@@ -64,20 +64,12 @@
 <part>id</part>
 </key>
 </table>
-<table x="963" y="202" name="ingredients">
+<table x="875" y="209" name="ingredients">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="783" y="101" name="doses">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="unit" null="1" autoincrement="0">
 <datatype>ENUM</datatype>
@@ -85,10 +77,6 @@
 <row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="ingredient_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="ingredients" row="id" />
-</row>
 <row name="recipe_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="recipes" row="id" />
@@ -97,7 +85,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="961" y="304" name="instructions">
+<table x="875" y="482" name="instructions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
